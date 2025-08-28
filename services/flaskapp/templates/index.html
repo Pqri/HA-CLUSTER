@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HA Flask Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; }
+      form { display: grid; gap: .5rem; max-width: 400px; margin-bottom: 1rem; }
+      input, button { padding: .6rem .8rem; font-size: 1rem; }
+      table { border-collapse: collapse; width: 100%; max-width: 760px;}
+      th, td { border: 1px solid #ddd; padding: .5rem; text-align: left;}
+      tr:nth-child(even) { background: #f8f8f8; }
+      .ok { color: #0a7; }
+      .err { color: #b00; }
+    </style>
+  </head>
+  <body>
+    <h1>HA Flask Demo</h1>
+    {% if message %}
+      <p class="{{ 'ok' if 'Saved' in message else 'err' }}">{{ message }}</p>
+    {% endif %}
+    <form method="post">
+      <input name="name" placeholder="Location name" required>
+      <input name="lat" placeholder="Latitude" required>
+      <input name="lon" placeholder="Longitude" required>
+      <button type="submit">Save</button>
+    </form>
+
+    <h3>Last 5 Records</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Server</th><th>Name</th><th>Lat</th><th>Lon</th><th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+            <td>{{ r[5] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
